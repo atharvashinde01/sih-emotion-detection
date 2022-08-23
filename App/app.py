@@ -44,7 +44,7 @@ def main():
 			submit_text = st.form_submit_button(label='Submit')
 
 		if submit_text:
-			col1,col2  = st.beta_columns(2)
+			col1,col2  = st.columns(2)
 
 			# Apply Fxn Here
 			prediction = predict_emotions(raw_text)
@@ -76,34 +76,34 @@ def main():
 
 
 
-	elif choice == "Monitor":
-		add_page_visited_details("Monitor",datetime.now())
-		st.subheader("Monitor App")
+	# elif choice == "Monitor":
+	# 	add_page_visited_details("Monitor",datetime.now())
+	# 	st.subheader("Monitor App")
 
-		with st.beta_expander("Page Metrics"):
-			page_visited_details = pd.DataFrame(view_all_page_visited_details(),columns=['Pagename','Time_of_Visit'])
-			st.dataframe(page_visited_details)	
+	# 	with st.beta_expander("Page Metrics"):
+	# 		page_visited_details = pd.DataFrame(view_all_page_visited_details(),columns=['Pagename','Time_of_Visit'])
+	# 		st.dataframe(page_visited_details)	
 
-			pg_count = page_visited_details['Pagename'].value_counts().rename_axis('Pagename').reset_index(name='Counts')
-			c = alt.Chart(pg_count).mark_bar().encode(x='Pagename',y='Counts',color='Pagename')
-			st.altair_chart(c,use_container_width=True)	
+	# 		pg_count = page_visited_details['Pagename'].value_counts().rename_axis('Pagename').reset_index(name='Counts')
+	# 		c = alt.Chart(pg_count).mark_bar().encode(x='Pagename',y='Counts',color='Pagename')
+	# 		st.altair_chart(c,use_container_width=True)	
 
-			p = px.pie(pg_count,values='Counts',names='Pagename')
-			st.plotly_chart(p,use_container_width=True)
+	# 		p = px.pie(pg_count,values='Counts',names='Pagename')
+	# 		st.plotly_chart(p,use_container_width=True)
 
-		with st.beta_expander('Emotion Classifier Metrics'):
-			df_emotions = pd.DataFrame(view_all_prediction_details(),columns=['Rawtext','Prediction','Probability','Time_of_Visit'])
-			st.dataframe(df_emotions)
+	# 	with st.beta_expander('Emotion Classifier Metrics'):
+	# 		df_emotions = pd.DataFrame(view_all_prediction_details(),columns=['Rawtext','Prediction','Probability','Time_of_Visit'])
+	# 		st.dataframe(df_emotions)
 
-			prediction_count = df_emotions['Prediction'].value_counts().rename_axis('Prediction').reset_index(name='Counts')
-			pc = alt.Chart(prediction_count).mark_bar().encode(x='Prediction',y='Counts',color='Prediction')
-			st.altair_chart(pc,use_container_width=True)	
+	# 		prediction_count = df_emotions['Prediction'].value_counts().rename_axis('Prediction').reset_index(name='Counts')
+	# 		pc = alt.Chart(prediction_count).mark_bar().encode(x='Prediction',y='Counts',color='Prediction')
+	# 		st.altair_chart(pc,use_container_width=True)	
 
 
 
-	else:
-		st.subheader("About")
-		add_page_visited_details("About",datetime.now())
+	# else:
+	# 	st.subheader("About")
+	# 	add_page_visited_details("About",datetime.now())
 
 
 
